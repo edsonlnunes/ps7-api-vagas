@@ -2,22 +2,28 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    jest: true
+    jest: true,
   },
-  extends: [
-    'standard'
-  ],
-  parser: '@typescript-eslint/parser',
+  extends: ["plugin:prettier/recommended", "standard"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  plugins: [
-    '@typescript-eslint'
-  ],
+  plugins: ["@typescript-eslint", "prettier"],
   rules: {
-    semi: ['error', 'always', { omitLastInOneLineBlock: true }],
-    'no-useless-constructor': 'off',
-    camelcase: 'off'
-  }
+    semi: ["error", "always", { omitLastInOneLineBlock: true }],
+    "no-useless-constructor": "off",
+    camelcase: "off",
+    "prettier/prettier": [
+      "warn",
+      {
+        arrowParens: "always",
+        semi: true,
+        singleQuote: false,
+        tabWidth: 2,
+        endOfLine: "auto",
+      },
+    ],
+  },
 };

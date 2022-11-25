@@ -1,15 +1,24 @@
-import { DataSource } from "typeorm";
-import envsConfig from "../env/envs-config";
+/* eslint-disable n/no-path-concat */
+import { DataSourceOptions } from 'typeorm';
+import envsConfig from '../env/envs-config';
 
-export default new DataSource({
-  type: "postgres",
+const entities = `${__dirname}/../../../app/shared/entities/*.ts`;
+const migrations = `${__dirname}/../database/migrations/*.ts`;
+
+console.log(entities);
+console.log(migrations);
+console.log(envsConfig.DATABASE_URL);
+export const configTypeorm: DataSourceOptions = {
+  type: 'postgres',
   url: envsConfig.DATABASE_URL,
   synchronize: false,
   logging: false,
+  entities: [entities],
+  migrations: [migrations],
   ssl: {
-    rejectUnauthorized: false,
-  },
-});
+    rejectUnauthorized: false
+  }
+};
 
 // import "dotenv/config";
 // import { DataSourceOptions } from "typeorm";

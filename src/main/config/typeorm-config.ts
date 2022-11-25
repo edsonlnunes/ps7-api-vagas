@@ -1,25 +1,25 @@
 /* eslint-disable n/no-path-concat */
-import path from 'node:path';
-import { DataSourceOptions } from 'typeorm';
-import envsConfig from '../env/envs-config';
+import path from "node:path";
+import { DataSourceOptions } from "typeorm";
+import envsConfig from "../env/envs-config";
 
 const entities = path.join(
   __dirname,
-  '..',
-  '..',
-  'app',
-  'shared',
-  'entities',
-  '*.ts'
+  "..",
+  "..",
+  "app",
+  "shared",
+  "entities",
+  "*.ts"
 );
 
-const migrations = path.join(__dirname, '..', 'database', 'migrations', '*.ts');
+const migrations = path.join(__dirname, "..", "database", "migrations", "*.ts");
 
 console.log(entities);
 console.log(migrations);
 console.log(envsConfig.DATABASE_URL);
 export const configTypeorm: DataSourceOptions = {
-  type: 'postgres',
+  type: "postgres",
   url: envsConfig.DATABASE_URL,
   synchronize: false,
   logging: false,

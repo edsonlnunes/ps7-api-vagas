@@ -1,7 +1,7 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 const envsConfig = {
-  DATABASE_URL: process.env.DATABASE_URL
+  DATABASE_URL: process.env.DATABASE_URL,
 };
 
 export default envsConfig;

@@ -1,9 +1,19 @@
 /* eslint-disable n/no-path-concat */
+import path from 'node:path';
 import { DataSourceOptions } from 'typeorm';
 import envsConfig from '../env/envs-config';
 
-const entities = `${__dirname}/../../../app/shared/entities/*.ts`;
-const migrations = `${__dirname}/../database/migrations/*.ts`;
+const entities = path.join(
+  __dirname,
+  '..',
+  '..',
+  'app',
+  'shared',
+  'entities',
+  '*.ts'
+);
+
+const migrations = path.join(__dirname, '..', 'database', 'migrations', '*.ts');
 
 console.log(entities);
 console.log(migrations);
@@ -16,8 +26,8 @@ export const configTypeorm: DataSourceOptions = {
   entities: [entities],
   migrations: [migrations],
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 };
 
 // import "dotenv/config";

@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "typeorm:up": "typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
-    "typeorm:down": "typeorm-ts-node-commonjs migration:down -d ./src/main/database/database-connection.ts",
+    "typeorm:down": "typeorm-ts-node-commonjs migration:revert -d ./src/main/database/database-connection.ts",
     "typeorm:migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/main/database/database-connection.ts"
   },
   "repository": {

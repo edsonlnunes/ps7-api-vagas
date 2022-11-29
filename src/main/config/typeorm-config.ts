@@ -9,15 +9,13 @@ const entities = path.join(
   "..",
   "app",
   "shared",
+  "database",
   "entities",
   "*.ts"
 );
 
 const migrations = path.join(__dirname, "..", "database", "migrations", "*.ts");
 
-console.log(entities);
-console.log(migrations);
-console.log(envsConfig.DATABASE_URL);
 export const configTypeorm: DataSourceOptions = {
   type: "postgres",
   url: envsConfig.DATABASE_URL,

@@ -11,19 +11,19 @@ export class UserEntity {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @Column({ length: 50 })
+  @Column()
   name!: string;
 
-  @Column({ unique: true, length: 50 })
+  @Column()
   username!: string;
 
-  @Column({ length: 50 })
+  @Column()
   password!: string;
 
-  @Column({ length: 10 })
+  @Column()
   profile!: string;
 
-  @Column({ length: 50 })
+  @Column()
   company?: string;
 
   @UpdateDateColumn({ name: "updated_at" })

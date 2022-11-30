@@ -31,21 +31,4 @@ export default class UserRepository {
   async getUsers(): Promise<User[]> {
     return [];
   }
-
-
-  async findUser(username: string): Promise<UserEntity> {
-    const manager = dataSource.manager;
-
-    const userEntity = await manager.findOne(UserEntity, {
-      where: {
-        username
-      },
-    })
-
-    if (!userEntity) {
-      throw new Error("Usuario não encontrado")
-    }
-
-    return userEntity
-  }
 }

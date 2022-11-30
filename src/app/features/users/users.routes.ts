@@ -1,4 +1,5 @@
 import { Router } from "express";
+import TokenValidator from "../../shared/validators/token.validator";
 import UserController from "./controllers/user.controller";
 import CreateUserValidator from "./validators/create-user.validator";
 import LoginUserValidator from "./validators/login-user.validator";
@@ -18,7 +19,13 @@ export default () => {
     "/users/login",
     new LoginUserValidator().validate,
     userController.loginUser
-  )
+  );
+
+  router.get(
+    "/users",
+    new TokenValidator().validate,
+    userController.listAllUsers
+  );
 
   return router;
 };

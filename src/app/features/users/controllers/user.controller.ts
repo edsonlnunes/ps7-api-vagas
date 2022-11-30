@@ -20,6 +20,12 @@ export default class UserController {
     // mandar executar usecase
     // retornar o que usecase devolver
     // tratativa de erro
+
+    try {
+      return response.status(200).json("a implementar");
+    } catch (error: any) {
+      return response.status(400).json({ error: error.message, stack: error });
+    }
   }
 
   async loginUser(request: Request, response: Response) {

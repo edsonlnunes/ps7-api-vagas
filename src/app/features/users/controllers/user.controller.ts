@@ -19,7 +19,7 @@ export default class UserController {
     // instanciar usecase
     // mandar executar usecase
     // retornar o que usecase devolver
-    // tratativa de erro
+    // tratativa de erro ✅
 
     try {
       return response.status(200).json("a implementar");

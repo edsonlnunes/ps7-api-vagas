@@ -12,7 +12,6 @@ export default class TokenValidator {
 
     try {
       const payload = verify(token.split(" ")[1], envsConfig.SECRET_TOKEN!);
-      console.log(payload);
     } catch (error) {
       response.status(401).json({ error: "Usuário não autenticado." });
     }

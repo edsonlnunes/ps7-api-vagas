@@ -10,7 +10,6 @@ export default class UserController {
       const result = await usecase.execute(request.body);
 
       return response.status(200).json(result);
-
     } catch (error: any) {
       return response.status(500).json({ error: error.message, stack: error });
     }
@@ -25,18 +24,16 @@ export default class UserController {
 
   async loginUser(request: Request, response: Response) {
     try {
-      console.log(request.headers.authorization);
-
       const { username, password } = request.body;
       // const username = request.body.username;
       // const password = request.body.password;
       const useCase = new LoginUser();
 
-      const token = await useCase.execute({ username, password })
+      const token = await useCase.execute({ username, password });
 
-      return response.status(200).json(token)
+      return response.status(200).json(token);
     } catch (error: any) {
-      return response.status(400).json({ error: error.message, stack: error })
+      return response.status(400).json({ error: error.message, stack: error });
     }
   }
 }

@@ -20,7 +20,9 @@ export default class LoginUser {
       throw new Error("Senha inválida");
     }
 
-    const token = sign(userFind.name, envsConfig.SECRET_TOKEN!);
+    const token = sign({ name: userFind.name }, envsConfig.SECRET_TOKEN!, {
+      expiresIn: envsConfig.EXPIRE_IN,
+    });
 
     return token;
   }

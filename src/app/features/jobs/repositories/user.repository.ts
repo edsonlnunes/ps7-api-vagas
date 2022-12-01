@@ -1,14 +1,14 @@
+import { UserEntity } from "../../../shared/database/entities/user.entity";
 import dataSource from "../../../../main/database/database-connection";
 import User from "../../../models/user";
-import { UserEntity } from "../../../shared/database/entities/user.entity";
 
 export default class UserRepository {
-  async findUserByUsername(username: string): Promise<User> {
+  async findUserById(id: string): Promise<User> {
     const manager = dataSource.manager;
 
     const userEntity = await manager.findOne(UserEntity, {
       where: {
-        username,
+        id,
       },
     });
 

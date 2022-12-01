@@ -12,15 +12,23 @@ export default class LoginUser {
   async execute({ username, password }: RequestData): Promise<string> {
     const userRepository = new UserRepository();
 
-    const userFind = await userRepository.findUserByUsername(username);
+    const user = await userRepository.findUserByUsername(username);
 
-    const passwordConfirm = await bcrypt.compare(password, userFind.password);
+    const passwordConfirm = await bcrypt.compare(password, user.password!);
 
     if (!passwordConfirm) {
       throw new Error("Senha inválida");
     }
 
-    const token = sign({ name: userFind.name }, envsConfig.SECRET_TOKEN!, {
+    user.removePassword();
+
+    const payloadToken = {
+      userId: user.id,
+      company: user.company,
+      profile: user.profile,
+    };
+
+    const token = sign(payloadToken, envsConfig.SECRET_TOKEN!, {
       expiresIn: envsConfig.EXPIRE_IN,
     });
 

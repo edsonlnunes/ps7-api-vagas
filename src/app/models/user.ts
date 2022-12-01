@@ -27,12 +27,18 @@ export default class User {
     return this._company;
   }
 
+  _password?: string;
+  get password(): string | undefined {
+    return this._password;
+  }
+
   constructor(
     name: string,
     username: string,
     profile: EProfile,
     company?: string,
-    id?: string
+    id?: string,
+    password?: string
   ) {
     if (profile.toUpperCase() === EProfile.RECRUITER) {
       if (!company) {
@@ -46,6 +52,11 @@ export default class User {
     this._username = username;
     this._profile = profile;
     this._id = id ?? randomUUID();
+    this._password = password;
+  }
+
+  removePassword() {
+    this._password = undefined;
   }
 
   toJson() {

@@ -7,11 +7,20 @@ export default class TokenValidator {
     const token = request.headers?.authorization;
 
     if (!token) {
-      return response.status(400).json({ error: "Autenticação necessária." });
+      return response.status(401).json({ error: "Autenticação necessária." });
     }
 
     try {
-      const payload = verify(token.split(" ")[1], envsConfig.SECRET_TOKEN!);
+      const payload = verify(
+        token.split(" ")[1],
+        envsConfig.SECRET_TOKEN!
+      ) as any;
+
+      request.userAuth = {
+        userId: payload.userId,
+        profile: payload.profile,
+        company: payload.company,
+      };
     } catch (error) {
       response.status(401).json({ error: "Usuário não autenticado." });
     }

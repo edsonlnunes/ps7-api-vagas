@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { EProfile } from "../../enums/profile.enum";
 
 @Entity({ name: "users" })
 export class UserEntity {
@@ -20,8 +21,8 @@ export class UserEntity {
   @Column()
   password!: string;
 
-  @Column()
-  profile!: string;
+  @Column({ type: "enum", enum: EProfile })
+  profile!: EProfile;
 
   @Column()
   company?: string;

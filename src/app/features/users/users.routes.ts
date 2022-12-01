@@ -9,16 +9,12 @@ export default () => {
   const userController = new UserController();
 
   router.post(
-    "/users",
+    "/",
     new CreateUserValidator().validate,
     userController.createUser
   );
 
-  router.get(
-    "/users",
-    new TokenValidator().validate,
-    userController.listAllUsers
-  );
+  router.get("/", new TokenValidator().validate, userController.listAllUsers);
 
   return router;
 };

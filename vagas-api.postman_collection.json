@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "f4f7dfa6-e03b-4264-bf69-fa4ab89f79b5",
+		"_postman_id": "30a1254f-80dd-4b55-98ac-6c0bd1034846",
 		"name": "vagas-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "3531157"
+		"_exporter_id": "12727052"
 	},
 	"item": [
 		{
-			"name": "Login",
+			"name": "login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -21,13 +21,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/login",
+					"raw": "http://localhost:8080/users/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"users",
 						"login"
 					]
 				}
@@ -35,7 +36,7 @@
 			"response": []
 		},
 		{
-			"name": "Criar usuário",
+			"name": "create user",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -73,7 +74,7 @@
 			"response": []
 		},
 		{
-			"name": "Listar usuários",
+			"name": "Listen user",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -96,44 +97,6 @@
 					"port": "8080",
 					"path": [
 						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Criar usuários",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhMzk2Y2E3MS05MjIwLTRiZGItOTcwNC1iZWE4NDIwOTRmOTEiLCJwcm9maWxlIjoiYWRtaW4iLCJpYXQiOjE2Njk4NTY3MDAsImV4cCI6MTY2OTk0MzEwMH0.xVvbF9tCJYDnnjBcznmGdoLNK97ndYiQnuNOb1B6Saw",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"description\": \"testeee\",\r\n    \"deadline\": \"2022-12-23\",\r\n    \"maxCandidates\": 20\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/jobs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"jobs"
 					]
 				}
 			},

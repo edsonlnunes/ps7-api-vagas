@@ -29,6 +29,19 @@ export default class UserRepository {
   }
 
   async getUsers(): Promise<User[]> {
-    return [];
+    const manager = dataSource.manager;
+
+    const listAllUsers = await manager.find(UserEntity);
+  
+    const list = listAllUsers.map(user => {
+      return new User(user.name,
+        user.username,
+        user.profile,
+        user.company,
+        user.id
+      )
+    });
+
+    return list;
   }
 }

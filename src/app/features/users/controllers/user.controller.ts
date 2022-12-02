@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import CreateUser from "../usecases/create-user.usecase";
+import { ListAllUsers } from "../usecases/list-all-user.usecase";
 
 export default class UserController {
   async createUser(request: Request, response: Response) {
@@ -15,15 +16,17 @@ export default class UserController {
   }
 
   async listAllUsers(request: Request, response: Response) {
-    // instanciar usecase
-    // mandar executar usecase
-    // retornar o que usecase devolver
-    // tratativa de erro ✅
-
     try {
-      return response.status(200).json("a implementar");
+      const usecase = new ListAllUsers();
+      return response.status(200).json(await usecase.execute());
     } catch (error: any) {
       return response.status(400).json({ error: error.message, stack: error });
     }
   }
 }
+
+// instanciar usecase
+// mandar executar usecase
+// retornar o que usecase devolver
+// tratativa de erro ✅
+

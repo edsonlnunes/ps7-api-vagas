@@ -3,3 +3,5 @@ export enum EProfile {
   RECRUITER = "RECRUITER",
   CANDIDATE = "CANDIDATE",
 }
+
+export type ExpProfile = keyof typeof EProfile;

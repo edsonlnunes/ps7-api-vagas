@@ -2,10 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { EProfile } from "../../enums/profile.enum";
+import { CandidateJobEntity } from "./candidate-job.entity";
 
 @Entity({ name: "users" })
 export class UserEntity {
@@ -32,4 +34,7 @@ export class UserEntity {
 
   @CreateDateColumn({ name: "created_at" })
   createdAt!: Date;
+
+  @OneToMany(() => CandidateJobEntity, (entity) => entity.candidateEntity)
+  jobs?: CandidateJobEntity[];
 }

@@ -4,9 +4,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { CandidateJobEntity } from "./candidate-job.entity";
 import { UserEntity } from "./user.entity";
 
 @Entity({ name: "jobs" })
@@ -41,4 +43,7 @@ export class JobEntity {
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: "id_recruiter", referencedColumnName: "id" })
   recruiterEntity?: UserEntity;
+
+  @OneToMany(() => CandidateJobEntity, (entity) => entity.jobEntity)
+  candidatesEntities?: CandidateJobEntity[];
 }

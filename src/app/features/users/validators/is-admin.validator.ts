@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { EProfile, ExpProfile } from "../../../shared/enums/profile.enum";
 
-export class ProfileValidator {
+export class IsAdminValidator {
   validate(request: Request, response: Response, next: NextFunction) {
     const profile = request.userAuth.profile.toUpperCase() as ExpProfile;
 
@@ -14,9 +14,3 @@ export class ProfileValidator {
     next();
   }
 }
-
-// request.userAuth = {
-//   userId: payload.userId,
-//   profile: payload.profile,
-//   company: payload.company,
-// };

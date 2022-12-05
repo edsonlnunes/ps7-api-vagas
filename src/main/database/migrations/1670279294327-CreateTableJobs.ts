@@ -21,12 +21,12 @@ export class CreateTableJobs1670279294327 implements MigrationInterface {
           {
             name: "updated_at",
             type: "timestamp",
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: "created_at",
             type: "timestamp",
-            isNullable: true,
+            isNullable: false,
           },
         ],
         foreignKeys: [

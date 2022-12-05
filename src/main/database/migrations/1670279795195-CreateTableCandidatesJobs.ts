@@ -17,8 +17,8 @@ export class CreateTableCandidatesJobs1670279795195
           { name: "job_id", type: "uuid", isNullable: false },
           { name: "candidate_id", type: "uuid", isNullable: false },
           { name: "success_indicator", type: "boolean", isNullable: true },
-          { name: "updated_at", type: "timestamp", isNullable: true },
-          { name: "created_at", type: "timestamp", isNullable: true },
+          { name: "updated_at", type: "timestamp", isNullable: false },
+          { name: "created_at", type: "timestamp", isNullable: false },
         ],
         foreignKeys: [
           new TableForeignKey({

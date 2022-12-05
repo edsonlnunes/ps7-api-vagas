@@ -1,19 +1,10 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column, Entity, OneToMany } from "typeorm";
 import { EProfile } from "../../enums/profile.enum";
+import { EntityBase } from "./base.entity";
 import { CandidateJobEntity } from "./candidate-job.entity";
 
 @Entity({ name: "users" })
-export class UserEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
-
+export class UserEntity extends EntityBase {
   @Column()
   name!: string;
 
@@ -28,12 +19,6 @@ export class UserEntity {
 
   @Column()
   company?: string;
-
-  @UpdateDateColumn({ name: "updated_at" })
-  updatedAt!: Date;
-
-  @CreateDateColumn({ name: "created_at" })
-  createdAt!: Date;
 
   @OneToMany(() => CandidateJobEntity, (entity) => entity.candidateEntity)
   jobs?: CandidateJobEntity[];

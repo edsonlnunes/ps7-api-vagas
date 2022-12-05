@@ -1,20 +1,10 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { EntityBase } from "./base.entity";
 import { JobEntity } from "./job.entity";
 import { UserEntity } from "./user.entity";
 
 @Entity({ name: "candidates_jobs" })
-export class CandidateJobEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id!: string;
-
+export class CandidateJobEntity extends EntityBase {
   @Column({ name: "candidate_id" })
   candidateId!: string;
 
@@ -23,12 +13,6 @@ export class CandidateJobEntity {
 
   @Column({ name: "success_indicator" })
   successIndicator?: boolean;
-
-  @UpdateDateColumn({ name: "updated_at" })
-  updatedAt!: Date;
-
-  @CreateDateColumn({ name: "created_at" })
-  createdAt!: Date;
 
   @ManyToOne(() => UserEntity, (entity) => entity.jobs)
   @JoinColumn({ name: "candidate_id", referencedColumnName: "id" })

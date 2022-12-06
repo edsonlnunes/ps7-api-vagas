@@ -18,7 +18,7 @@ export class CandidateJobEntity extends EntityBase {
   @JoinColumn({ name: "candidate_id", referencedColumnName: "id" })
   candidateEntity?: UserEntity;
 
-  @ManyToOne(() => JobEntity, (entity) => entity.candidatesEntities)
+  @ManyToOne(() => JobEntity, (entity) => entity.inscriptions)
   @JoinColumn({ name: "job_id", referencedColumnName: "id" })
   jobEntity?: JobEntity;
 }

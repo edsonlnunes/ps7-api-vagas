@@ -28,5 +28,5 @@ export class JobEntity extends EntityBase {
   recruiterEntity?: UserEntity;
 
   @OneToMany(() => CandidateJobEntity, (entity) => entity.jobEntity)
-  candidatesEntities?: CandidateJobEntity[];
+  inscriptions?: CandidateJobEntity[];
 }

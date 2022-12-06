@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ExpProfile } from "../../../shared/enums/profile.enum";
 import CreateUser from "../usecases/create-user.usecase";
 import { ListAllUsers } from "../usecases/list-all-user.usecase";
 
@@ -15,10 +16,14 @@ export default class UserController {
     }
   }
 
-  async listAllUsers(request: Request, response: Response) {
+  async listUsers(request: Request, response: Response) {
+    const { profile } = request.query;
+
     try {
       const usecase = new ListAllUsers();
-      return response.status(200).json(await usecase.execute());
+      return response
+        .status(200)
+        .json(await usecase.execute(profile as ExpProfile | undefined));
     } catch (error: any) {
       return response.status(400).json({ error: error.message, stack: error });
     }
@@ -29,4 +34,3 @@ export default class UserController {
 // mandar executar usecase
 // retornar o que usecase devolver
 // tratativa de erro ✅
-

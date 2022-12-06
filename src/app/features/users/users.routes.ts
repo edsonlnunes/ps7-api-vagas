@@ -3,6 +3,7 @@ import TokenValidator from "../../shared/validators/token.validator";
 import UserController from "./controllers/user.controller";
 import CreateUserValidator from "./validators/create-user.validator";
 import { IsAdminValidator } from "./validators/is-admin.validator";
+import { ListUserQueryValidator } from "./validators/list-user-query.validator";
 
 export default () => {
   const router = Router();
@@ -19,7 +20,8 @@ export default () => {
     "/",
     new TokenValidator().validate,
     new IsAdminValidator().validate,
-    userController.listAllUsers
+    new ListUserQueryValidator().validate,
+    userController.listUsers
   );
 
   return router;

@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { EProfile } from "../shared/enums/profile.enum";
+import { EProfile, ExpProfile } from "../shared/enums/profile.enum";
 
 export default class User {
   private _id: string;
@@ -17,8 +17,8 @@ export default class User {
     return this._username;
   }
 
-  private _profile: EProfile;
-  get profile(): EProfile {
+  private _profile: ExpProfile;
+  get profile(): ExpProfile {
     return this._profile;
   }
 
@@ -35,7 +35,7 @@ export default class User {
   constructor(
     name: string,
     username: string,
-    profile: EProfile,
+    profile: ExpProfile,
     company?: string,
     id?: string,
     password?: string

@@ -1,6 +1,7 @@
 import User from "../../../models/user";
 import dataSource from "../../../../main/database/database-connection";
 import { UserEntity } from "../../../shared/database/entities/user.entity";
+import { EProfile, ExpProfile } from "../../../shared/enums/profile.enum";
 
 export default class UserRepository {
   async verifyUserExistsByUsername(username: string): Promise<boolean> {
@@ -28,18 +29,21 @@ export default class UserRepository {
     await manager.save(userEntity);
   }
 
-  async getUsers(): Promise<User[]> {
+  async getUsers(profile: ExpProfile | undefined): Promise<User[]> {
     const manager = dataSource.manager;
 
-    const listAllUsers = await manager.find(UserEntity);
-  
-    const list = listAllUsers.map(user => {
-      return new User(user.name,
+    const listAllUsers = await manager.find(UserEntity, {
+      where: { profile: profile },
+    });
+
+    const list = listAllUsers.map((user) => {
+      return new User(
+        user.name,
         user.username,
         user.profile,
         user.company,
         user.id
-      )
+      );
     });
 
     return list;

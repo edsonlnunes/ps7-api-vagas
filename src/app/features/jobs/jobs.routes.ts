@@ -1,13 +1,19 @@
 import { Router } from "express";
 import TokenValidator from "../../shared/validators/token.validator";
+import CandidateController from "./controller/candidate.controller";
 import JobController from "./controller/job.controller";
 
 export default () => {
   const router = Router();
 
-  const jobController = new JobController();
+  router.use(new TokenValidator().validate);
 
-  router.post("/", new TokenValidator().validate, jobController.createJob);
+  const jobController = new JobController();
+  const candidateController = new CandidateController();
+
+  router.post("/", jobController.createJob);
+
+  router.post("/:id/apply", candidateController.applyToJob);
 
   return router;
 };

@@ -2,32 +2,32 @@ import { randomUUID } from "crypto";
 import { EProfile } from "../shared/enums/profile.enum";
 
 export default class User {
-  _id: string;
+  private _id: string;
   get id(): string {
     return this._id;
   }
 
-  _name: string;
+  private _name: string;
   get name(): string {
     return this._name;
   }
 
-  _username: string;
+  private _username: string;
   get username(): string {
     return this._username;
   }
 
-  _profile: EProfile;
+  private _profile: EProfile;
   get profile(): EProfile {
     return this._profile;
   }
 
-  _company?: string;
+  private _company?: string;
   get company(): string | undefined {
     return this._company;
   }
 
-  _password?: string;
+  private _password?: string;
   get password(): string | undefined {
     return this._password;
   }

@@ -1,40 +1,47 @@
 import { randomUUID } from "crypto";
+import { EProfile } from "../shared/enums/profile.enum";
 import User from "./user";
 
 export default class Job {
-  _id: string;
+  private _id: string;
   get id(): string {
     return this._id;
   }
 
-  _description: string;
+  private _description: string;
   get description(): string {
     return this._description;
   }
 
-  _company: string;
+  private _company: string;
   get company(): string {
     return this._company;
   }
 
-  _deadline: Date;
+  private _deadline: Date;
   get deadline(): Date {
     return this._deadline;
   }
 
-  _enable: boolean;
+  private _enable: boolean;
   get enable(): boolean {
     return this._enable;
   }
 
-  _maxCandidates?: number;
+  private _maxCandidates?: number;
   get maxCandidates(): number | undefined {
     return this._maxCandidates;
   }
 
-  _recruiter: User;
+  private _recruiter: User;
   get recruiter(): User {
     return this._recruiter;
+  }
+
+  private _candidates: User[];
+
+  get candidates(): User[] {
+    return this._candidates;
   }
 
   constructor(
@@ -44,7 +51,8 @@ export default class Job {
     recruiter: User,
     enable: boolean,
     maxCandidates?: number,
-    id?: string
+    id?: string,
+    candidates?: User[]
   ) {
     this._description = description;
     this._company = company;
@@ -53,6 +61,23 @@ export default class Job {
     this._enable = enable;
     this._maxCandidates = maxCandidates;
     this._id = id ?? randomUUID();
+    this._candidates = [];
+
+    // valida se todos os usuários da lista são do perfil CANDIDATE
+    // se nao for, joga um erro
+    if (candidates) {
+      const validCandidates = candidates.every(
+        (candidate) => candidate.profile === EProfile.CANDIDATE
+      );
+
+      if (!validCandidates) {
+        throw new Error(
+          "Somente usuários do perfil CANDIDATE podem ser candidatos."
+        );
+      }
+
+      this._candidates = candidates;
+    }
   }
 
   toJson() {
@@ -65,5 +90,15 @@ export default class Job {
       enable: this._enable,
       recruiter: this._recruiter.toJson(),
     };
+  }
+
+  isFull(): boolean {
+    if (!this.maxCandidates) return false;
+
+    return this.maxCandidates === this.candidates.length;
+  }
+
+  candidateAlreadyApply(candidateId: string): boolean {
+    return this.candidates.some((candidate) => candidate.id === candidateId);
   }
 }

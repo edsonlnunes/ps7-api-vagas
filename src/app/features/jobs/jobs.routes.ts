@@ -15,5 +15,10 @@ export default () => {
 
   router.post("/:id/apply", candidateController.applyToJob);
 
+  router.get("/", 
+    new TokenValidator().validate, 
+    jobController.listJobs
+  )
+
   return router;
 };

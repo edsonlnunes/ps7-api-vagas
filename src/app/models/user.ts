@@ -39,11 +39,11 @@ export default class User {
     company?: string,
     id?: string,
     password?: string
-  ) {
+  ) {    
     if (profile.toUpperCase() === EProfile.RECRUITER) {
       if (!company) {
         throw new Error("Usuário inválido");
-      }
+      } 
 
       this._company = company;
     }

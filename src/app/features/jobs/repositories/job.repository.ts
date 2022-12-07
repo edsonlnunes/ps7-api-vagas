@@ -75,4 +75,31 @@ export default class JobRepository {
 
     await manager.save(entity);
   }
+
+  async findJobs(): Promise<Job[]> {
+    const manager = dataSource.manager;
+
+    const jobEntities = await manager.find(JobEntity,{
+      relations: ['recruiterEntity']
+    });
+
+    const jobs = jobEntities.map(job => {   
+      return new Job(
+        job.description, 
+        job.company, 
+        job.limitDate,
+        new User(
+          job.recruiterEntity?.name!,
+          job.recruiterEntity?.username!,
+          job.recruiterEntity?.profile!,
+          job.recruiterEntity?.company,
+          job.recruiterEntity?.id,
+          ),
+        job.status,
+        job.maxApplicant,
+      )
+    });
+
+    return jobs;
+  }
 }

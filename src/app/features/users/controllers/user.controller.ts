@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ExpProfile } from "../../../shared/enums/profile.enum";
+import UserRepository from "../repositories/user.repository";
 import CreateUser from "../usecases/create-user.usecase";
 import { ListAllUsers } from "../usecases/list-all-user.usecase";
 
@@ -20,7 +21,7 @@ export default class UserController {
     const { profile } = request.query;
 
     try {
-      const usecase = new ListAllUsers();
+      const usecase = new ListAllUsers(new UserRepository());
       return response
         .status(200)
         .json(await usecase.execute(profile as ExpProfile | undefined));

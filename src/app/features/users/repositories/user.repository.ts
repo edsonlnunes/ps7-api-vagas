@@ -1,7 +1,7 @@
 import User from "../../../models/user";
 import dataSource from "../../../../main/database/database-connection";
 import { UserEntity } from "../../../shared/database/entities/user.entity";
-import { EProfile, ExpProfile } from "../../../shared/enums/profile.enum";
+import { ExpProfile } from "../../../shared/enums/profile.enum";
 
 export default class UserRepository {
   async verifyUserExistsByUsername(username: string): Promise<boolean> {

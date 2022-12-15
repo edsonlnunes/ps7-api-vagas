@@ -1,17 +1,23 @@
 import UserRepository from "../repositories/user.repository";
 import bcryp from "bcrypt";
 import User from "../../../models/user";
-import { EProfile } from "../../../shared/enums/profile.enum";
+import { ExpProfile } from "../../../shared/enums/profile.enum";
 
 interface RequestData {
   name: string;
   username: string;
   password: string;
   company: string;
-  profile: EProfile;
+  profile: ExpProfile;
 }
 
 export default class CreateUser {
+  private _repository: UserRepository;
+
+  constructor(userRepository: UserRepository) {
+    this._repository = userRepository;
+  }
+
   async execute({
     name,
     username,
@@ -20,9 +26,10 @@ export default class CreateUser {
     profile,
   }: RequestData): Promise<any> {
     // verificar se o usuário já existe
-    const userRepository = new UserRepository();
 
-    const userExists = await userRepository.verifyUserExistsByUsername(
+    // const userRepository = new UserRepository();
+
+    const userExists = await this._repository.verifyUserExistsByUsername(
       username
     );
 
@@ -36,7 +43,7 @@ export default class CreateUser {
     // salvar no banco de dados
     const user = new User(name, username, profile, company);
 
-    await userRepository.createUser(user, encryptedPassword);
+    await this._repository.createUser(user, encryptedPassword);
 
     return user.toJson();
   }

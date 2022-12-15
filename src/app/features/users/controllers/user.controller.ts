@@ -7,7 +7,7 @@ import { ListAllUsers } from "../usecases/list-all-user.usecase";
 export default class UserController {
   async createUser(request: Request, response: Response) {
     try {
-      const usecase = new CreateUser();
+      const usecase = new CreateUser(new UserRepository());
 
       const result = await usecase.execute(request.body);
 

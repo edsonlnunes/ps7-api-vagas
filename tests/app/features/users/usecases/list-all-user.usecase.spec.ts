@@ -2,7 +2,7 @@ import { ListAllUsers } from "../../../../../src/app/features/users/usecases/lis
 import UserRepository from "../../../../../src/app/features/users/repositories/user.repository";
 import User from "../../../../../src/app/models/user";
 
-describe("Testar listagem de todos os usuários", () => {
+describe.skip("Testar listagem de todos os usuários", () => {
   test("Testa método execute", async () => {
     const sut = new ListAllUsers(new UserRepository());
     jest.spyOn(UserRepository.prototype, "getUsers").mockResolvedValue([]);

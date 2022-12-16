@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import UserRepository from "../repositories/user.repository";
+import JobRepository from "../repositories/job.repository";
 import ApplyToJob from "../usecases/apply-to-job.usecase";
 
 export default class CandidateController {
@@ -6,7 +8,10 @@ export default class CandidateController {
     try {
       const { id } = request.params;
 
-      const usecase = new ApplyToJob();
+      const userRepository = new UserRepository();
+      const jobRepository = new JobRepository();
+
+      const usecase = new ApplyToJob(userRepository, jobRepository);
 
       await usecase.execute({
         jobId: id,

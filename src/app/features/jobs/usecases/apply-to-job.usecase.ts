@@ -15,18 +15,26 @@ interface RequestData {
 // - O candidato já se aplicou a mesma vaga - OK
 // - O candidato for do tipo “admin” ou “recrutador” - OK
 export default class ApplyToJob {
-  async execute(data: RequestData): Promise<any> {
-    const userRepository = new UserRepository();
+  private _userRepository: UserRepository;
+  private _jobRepository: JobRepository;
 
-    const user = await userRepository.findUserById(data.candidateId);
+  constructor(userRepository: UserRepository, jobRepository: JobRepository) {
+    this._userRepository = userRepository;
+    this._jobRepository = jobRepository;
+  }
+
+  async execute(data: RequestData): Promise<any> {
+    // const userRepository = new UserRepository();
+
+    const user = await this._userRepository.findUserById(data.candidateId);
 
     if (user.profile !== EProfile.CANDIDATE) {
       throw new Error("Somente candidatos podem se inscrever em uma vaga");
     }
 
-    const jobRepository = new JobRepository();
+    // const jobRepository = new JobRepository();
 
-    const job = await jobRepository.getJobById(data.jobId);
+    const job = await this._jobRepository.getJobById(data.jobId);
 
     if (!job) {
       throw new Error("A vaga não foi encontrada");
@@ -54,6 +62,6 @@ export default class ApplyToJob {
       throw new Error("O candidato já está inscrito nesta vaga");
     }
 
-    await jobRepository.applyToJob(data.jobId, data.candidateId);
+    await this._jobRepository.applyToJob(data.jobId, data.candidateId);
   }
 }

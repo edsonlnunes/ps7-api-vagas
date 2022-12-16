@@ -19,4 +19,26 @@ describe("Testar a criação do usuário", () => {
       })
     ).rejects.toThrowError("Já existe um usuário com este username");
   });
+
+  test.skip("Teste de erro com try catch", async () => {
+    const repository = new UserRepository();
+    const sut = new CreateUser(repository);
+    jest
+      .spyOn(UserRepository.prototype, "verifyUserExistsByUsername")
+      .mockResolvedValue(true);
+    try {
+      await sut.execute({
+        name: "any_name",
+        username: "any_username",
+        profile: "CANDIDATE",
+        company: "any_cia",
+        password: "123",
+      })
+    } catch (error: any) {
+      console.log(error);
+      
+      expect(error.message).toEqual("Já existe um usuário com este username");
+      
+    }
+  });
 });

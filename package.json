@@ -13,9 +13,10 @@
     "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
     "test:coverage": "jest --runInBand --coverage",
     "test:watch": "jest --silent --noStackTrace --runInBand --watchAll",
-    "migration:test": "set NODE_ENV=test yarn typeorm-ts-node-commonjs migration:run -d src/main/config/typeorm-config.ts",
+    "migration:test": "set NODE_ENV=test && typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
     "test:setup": "rimraf test.sqlite && npm run migration:test",
-    "test:i": "npm run test:setup && set NODE_ENV=test jest --silent --noStackTrace --runInBand"
+    "test:i": "set NODE_ENV=test && npm run test:setup && jest --silent --noStackTrace --runInBand",
+    "test:i:v": "set NODE_ENV=test && npm run test:setup && jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",

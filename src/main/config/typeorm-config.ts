@@ -3,6 +3,8 @@ import path from "node:path";
 import { DataSourceOptions } from "typeorm";
 import envsConfig from "../env/envs-config";
 
+let configTypeorm: DataSourceOptions;
+
 const entities = path.join(
   __dirname,
   "..",
@@ -16,17 +18,42 @@ const entities = path.join(
 
 const migrations = path.join(__dirname, "..", "database", "migrations", "*.ts");
 
-export const configTypeorm: DataSourceOptions = {
-  type: "postgres",
-  url: envsConfig.DATABASE_URL,
-  synchronize: false,
-  logging: false,
-  entities: [entities],
-  migrations: [migrations],
-  ssl: {
-    rejectUnauthorized: false,
-  },
-};
+if (process.env.NODE_ENV === "test") {
+  configTypeorm = {
+    type: "sqlite",
+    database: "./test.sqlite",
+    synchronize: false,
+    logging: false,
+    entities: [entities],
+    migrations: [migrations],
+  };
+} else {
+  configTypeorm = {
+    type: "postgres",
+    url: envsConfig.DATABASE_URL,
+    synchronize: false,
+    logging: false,
+    entities: [entities],
+    migrations: [migrations],
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+}
+
+export { configTypeorm };
+
+// export const configTypeorm: DataSourceOptions = {
+//   type: "postgres",
+//   url: envsConfig.DATABASE_URL,
+//   synchronize: false,
+//   logging: false,
+//   entities: [entities],
+//   migrations: [migrations],
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+// };
 
 // import "dotenv/config";
 // import { DataSourceOptions } from "typeorm";

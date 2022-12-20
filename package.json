@@ -12,7 +12,10 @@
     "test": "jest --silent --noStackTrace --runInBand",
     "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
     "test:coverage": "jest --runInBand --coverage",
-    "test:watch": "jest --silent --noStackTrace --runInBand --watchAll"
+    "test:watch": "jest --silent --noStackTrace --runInBand --watchAll",
+    "migration:test": "set NODE_ENV=test yarn typeorm-ts-node-commonjs migration:run -d src/main/config/typeorm-config.ts",
+    "test:setup": "rimraf test.sqlite && npm run migration:test",
+    "test:i": "npm run test:setup && set NODE_ENV=test jest --silent --noStackTrace --runInBand"
   },
   "repository": {
     "type": "git",
@@ -45,6 +48,7 @@
     "@types/jest": "^29.2.4",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.11.9",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
@@ -54,6 +58,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.8.0",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.1.4",
+    "supertest": "^6.3.3",
     "ts-jest": "^29.0.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "*"

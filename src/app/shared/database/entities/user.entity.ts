@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany } from "typeorm";
-import { EProfile, ExpProfile } from "../../enums/profile.enum";
+import { ExpProfile } from "../../enums/profile.enum";
 import { EntityBase } from "./base.entity";
 import { CandidateJobEntity } from "./candidate-job.entity";
 
@@ -14,7 +14,7 @@ export class UserEntity extends EntityBase {
   @Column()
   password!: string;
 
-  @Column({ type: "enum", enum: EProfile })
+  @Column()
   profile!: ExpProfile;
 
   @Column()

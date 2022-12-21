@@ -14,4 +14,3 @@ export const config = {
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: ["\\\\node_modules\\\\"],
 };
-

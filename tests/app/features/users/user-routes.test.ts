@@ -90,6 +90,4 @@ describe("Testa rota de usuário", () => {
     expect(response.status).toBe(200);
     // expect(response.body).toEqual({ error: "Perfil deste tipo não encontrado."});
   });
-
-
 });

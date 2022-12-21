@@ -1,9 +1,10 @@
 import { ExpProfile } from "../../../shared/enums/profile.enum";
+import UserRepository from "../repositories/user.repository";
 
 export class ListAllUsers {
-  private _repository;
+  private _repository: UserRepository;
 
-  constructor(repository: any) {
+  constructor(repository: UserRepository) {
     this._repository = repository;
   }
 

@@ -22,7 +22,7 @@ export default class TokenValidator {
         company: payload.company,
       };
     } catch (error) {
-      response.status(401).json({ error: "Usuário não autenticado." });
+      return response.status(401).json({ error: "Usuário não autenticado." });
     }
 
     return next();

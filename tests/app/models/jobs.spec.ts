@@ -1,7 +1,7 @@
 import Job from "../../../src/app/models/job";
 import User from "../../../src/app/models/user";
 
-describe.skip("Testes model jobs", () => {
+describe("Testes model jobs", () => {
   test("Testa a criação de um novo job", () => {
     const today = new Date();
     const user = new User("joao", "joaosilva", "RECRUITER", "Growdev");

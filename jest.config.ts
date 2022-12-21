@@ -1,4 +1,4 @@
-const config = {
+export const config = {
   // Configura o Jest para testes no Node.js
   // usando Typescript.
   preset: "ts-jest",
@@ -14,4 +14,4 @@ const config = {
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: ["\\\\node_modules\\\\"],
 };
-module.exports = config;
+

@@ -9,14 +9,15 @@
     "typeorm:up": "typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
     "typeorm:down": "typeorm-ts-node-commonjs migration:revert -d ./src/main/database/database-connection.ts",
     "typeorm:migration:generate": "typeorm-ts-node-commonjs migration:generate -d ./src/main/database/database-connection.ts",
-    "test": "jest --silent --noStackTrace --runInBand",
-    "test:verbose": "jest --verbose --runInBand --detectOpenHandles",
-    "test:coverage": "jest --runInBand --coverage",
-    "test:watch": "jest --silent --noStackTrace --runInBand --watchAll",
+    "test:u": "jest --silent --noStackTrace --runInBand -c ./jest.config.u.ts",
+    "test:u:verbose": "jest --verbose --runInBand --detectOpenHandles -c ./jest.config.u.ts",
+    "test:u:coverage": "jest --runInBand --coverage -c ./jest.config.u.ts",
+    "test:u:watch": "jest --silent --noStackTrace --runInBand --watchAll -c ./jest.config.u.ts",
     "migration:test": "set NODE_ENV=test && typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
     "test:setup": "rimraf test.sqlite && npm run migration:test",
-    "test:i": "set NODE_ENV=test && npm run test:setup && jest --silent --noStackTrace --runInBand",
-    "test:i:v": "set NODE_ENV=test && npm run test:setup && jest --verbose --runInBand"
+    "test:i": "set NODE_ENV=test && npm run test:setup && jest --silent --noStackTrace --runInBand -c ./jest.config.i.ts",
+    "test:i:v": "set NODE_ENV=test && npm run test:setup && jest --verbose --runInBand -c ./jest.config.i.ts",
+    "test:i:c": "set NODE_ENV=test && npm run test:setup && jest --silent --coverage --noStackTrace --runInBand -c ./jest.config.i.ts"
   },
   "repository": {
     "type": "git",

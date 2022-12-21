@@ -1,6 +1,6 @@
 import User from "../../../src/app/models/user";
 
-describe.skip("Testes model Usuário", () => {
+describe("Testes model Usuário", () => {
   test("Testa a criação de um novo usuário ADMIN", () => {
     const sut = new User("joao", "joaosilva", "ADMIN");
 

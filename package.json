@@ -13,11 +13,11 @@
     "test:u:verbose": "jest --verbose --runInBand --detectOpenHandles -c ./jest.config.u.ts",
     "test:u:coverage": "jest --runInBand --coverage -c ./jest.config.u.ts",
     "test:u:watch": "jest --silent --noStackTrace --runInBand --watchAll -c ./jest.config.u.ts",
-    "migration:test": "set NODE_ENV=test && typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
+    "migration:test": "cross-env NODE_ENV=test  typeorm-ts-node-commonjs migration:run -d ./src/main/database/database-connection.ts",
     "test:setup": "rimraf test.sqlite && npm run migration:test",
-    "test:i": "set NODE_ENV=test && npm run test:setup && jest --silent --noStackTrace --runInBand -c ./jest.config.i.ts",
-    "test:i:v": "set NODE_ENV=test && npm run test:setup && jest --verbose --runInBand -c ./jest.config.i.ts",
-    "test:i:c": "set NODE_ENV=test && npm run test:setup && jest --silent --coverage --noStackTrace --runInBand -c ./jest.config.i.ts"
+    "test:i": "cross-env NODE_ENV=test  npm run test:setup && jest --silent --noStackTrace --runInBand -c ./jest.config.i.ts",
+    "test:i:v": "cross-env NODE_ENV=test  npm run test:setup && jest --verbose --runInBand -c ./jest.config.i.ts",
+    "test:i:c": "cross-env NODE_ENV=test  npm run test:setup && jest --silent --coverage --noStackTrace --runInBand -c ./jest.config.i.ts"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,7 @@
     "@types/node": "^18.11.9",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",

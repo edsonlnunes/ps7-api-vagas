@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { CacheRepository } from "../../../shared/database/cache-repositories/cache.repositoy";
 import { ExpProfile } from "../../../shared/enums/profile.enum";
 import UserRepository from "../repositories/user.repository";
 import CreateUser from "../usecases/create-user.usecase";
@@ -7,7 +8,7 @@ import { ListAllUsers } from "../usecases/list-all-user.usecase";
 export default class UserController {
   async createUser(request: Request, response: Response) {
     try {
-      const usecase = new CreateUser(new UserRepository());
+      const usecase = new CreateUser(new UserRepository(), new CacheRepository());
 
       const result = await usecase.execute(request.body);
 
@@ -21,7 +22,7 @@ export default class UserController {
     const { profile } = request.query;
 
     try {
-      const usecase = new ListAllUsers(new UserRepository());
+      const usecase = new ListAllUsers(new UserRepository(), new CacheRepository());
       return response
         .status(200)
         .json(await usecase.execute(profile as ExpProfile | undefined));

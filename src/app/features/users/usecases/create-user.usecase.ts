@@ -2,6 +2,7 @@ import UserRepository from "../repositories/user.repository";
 import bcryp from "bcrypt";
 import User from "../../../models/user";
 import { ExpProfile } from "../../../shared/enums/profile.enum";
+import { CacheRepository } from "../../../shared/database/cache-repositories/cache.repositoy";
 
 interface RequestData {
   name: string;
@@ -13,9 +14,11 @@ interface RequestData {
 
 export default class CreateUser {
   private _repository: UserRepository;
+  private _cacheRepository: CacheRepository;
 
-  constructor(userRepository: UserRepository) {
+  constructor(userRepository: UserRepository, cacheRepository: CacheRepository) {
     this._repository = userRepository;
+    this._cacheRepository = cacheRepository;
   }
 
   async execute({
@@ -44,6 +47,8 @@ export default class CreateUser {
     const user = new User(name, username, profile, company);
 
     await this._repository.createUser(user, encryptedPassword);
+
+    await this._cacheRepository.delete("users")
 
     return user.toJson();
   }

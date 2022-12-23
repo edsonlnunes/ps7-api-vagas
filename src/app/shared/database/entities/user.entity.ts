@@ -14,7 +14,7 @@ export class UserEntity extends EntityBase {
   @Column()
   password!: string;
 
-  @Column()
+  @Column({ type: "varchar" })
   profile!: ExpProfile;
 
   @Column()

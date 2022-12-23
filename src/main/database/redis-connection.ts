@@ -17,4 +17,7 @@ export class RedisConnection {
 
         return this._connection;
     }
+    public static destroy() {
+        this._connection.disconnect();
+    }
 }
